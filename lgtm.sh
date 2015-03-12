@@ -1,15 +1,14 @@
 #!/bin/bash
 
 sites=(
-    http://gif-chan.tumblr.com/
-    http://kawaiianimegif.tumblr.com/
+    http://publicdomaingifs.tumblr.com/
 )
 
 cachefile="$0.cache"
 
 lgtm() {
     site=${sites[$(($RANDOM % ${#sites[@]}))]}
-    echo '[![LGTM](http://lgtm.herokuapp.com/'$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}' | sed 's#/#%2F#g')')](http://lgtm.herokuapp.com/)'
+    echo '[![LGTM](http://lgtm.herokuapp.com/'$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}')')](http://lgtm.herokuapp.com/)'
 }
 
 if [ -s $cachefile ]; then
