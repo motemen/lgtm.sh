@@ -19,7 +19,7 @@ to your favorite animation-gif Tumblr blogs.
 
 ## Requirements
 
-Requires [pup](https://github.com/EricChiang/pup)
+[pup](https://github.com/EricChiang/pup)
 
 ## Author
 
