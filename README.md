@@ -13,7 +13,7 @@ Without `-m` option, it prints only the image URL.
 
 ## Customization
 
-Edit [sites](https://github.com/motemen/lgtm.sh/blob/fe42dc5/lgtm.sh#L3-5) of lgtm.sh
+Edit [sites](https://github.com/motemen/lgtm.sh/blob/master/lgtm.sh#L3-5) of lgtm.sh
 to your favorite animated GIF Tumblr blogs.
 
     sites=(
