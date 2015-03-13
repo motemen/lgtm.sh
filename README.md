@@ -12,7 +12,7 @@ The fastest way to generate animated LGTM images
 ## Customization
 
 Edit [sites](https://github.com/motemen/lgtm.sh/blob/fe42dc5/lgtm.sh#L3-5) of lgtm.sh
-to your favorite animation-gif Tumblr blogs.
+to your favorite animated GIF Tumblr blogs.
 
     sites=(
       http://foo.tumblr.com/
