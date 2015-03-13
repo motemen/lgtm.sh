@@ -6,14 +6,38 @@ sites=(
 
 cachefile="$0.cache"
 
-lgtm() {
-    site=${sites[$(($RANDOM % ${#sites[@]}))]}
-    echo '[![LGTM](http://lgtm.herokuapp.com/'$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}')')](http://lgtm.herokuapp.com/)'
+usage() {
+    cat <<EOD
+usage: $0 [-m]
+EOD
 }
 
-if [ -s $cachefile ]; then
-    cat $cachefile
-    ( lgtm > $cachefile ) &
-else
-    ( lgtm > $cachefile ) & lgtm
-fi
+lgtm_markdown() {
+    echo "[![LGTM]($(lgtm))](http://lgtm.herokuapp.com/)"
+}
+
+lgtm() {
+    if [ -s $cachefile ]; then
+        cat $cachefile
+        ( lgtm_nocache > $cachefile ) &
+    else
+        ( lgtm_nocache > $cachefile ) & lgtm_nocache
+    fi
+}
+
+lgtm_nocache() {
+    site=${sites[$(($RANDOM % ${#sites[@]}))]}
+    echo 'http://lgtm.herokuapp.com/'$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}')
+}
+
+case "$1" in
+    -m)
+        lgtm_markdown
+        ;;
+    '')
+        lgtm
+        ;;
+    *)
+        usage
+        ;;
+esac
