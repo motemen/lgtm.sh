@@ -2,6 +2,12 @@
 
 The fastest way to generate animated LGTM images
 
+## Installation
+
+With [bpkg](https://github.com/bpkg/bpkg) do:
+
+    % bpkg install motemen/lgtm.sh
+
 ## Usage
 
     % lgtm.sh -m
