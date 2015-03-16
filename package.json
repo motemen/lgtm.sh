@@ -1,6 +1,6 @@
 {
   "name": "lgtm",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "The fastest way to generate animated LGTM images",
   "global": "true",
   "install": "chmod +x lgtm.sh && install -b lgtm.sh ${PREFIX:-/usr/local}/bin/lgtm",
