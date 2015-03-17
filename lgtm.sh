@@ -19,25 +19,41 @@ lgtm_markdown() {
 lgtm() {
     if [ -s $cachefile ]; then
         cat $cachefile
-        ( lgtm_nocache > $cachefile ) &
     else
-        ( lgtm_nocache > $cachefile ) & lgtm_nocache
+        lgtm_nocache
     fi
 }
 
 lgtm_nocache() {
-    site=${sites[$(($RANDOM % ${#sites[@]}))]}
-    echo 'http://lgtm.herokuapp.com/'$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}')
+  echo $(fetch)
 }
 
-case "$1" in
-    -m)
-        lgtm_markdown
-        ;;
-    '')
-        lgtm
-        ;;
-    *)
-        usage
-        ;;
-esac
+fetch() {
+    site=${sites[$(($RANDOM % ${#sites[@]}))]}
+    local id=$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}')
+    echo "http://lgtm.herokuapp.com/$id"
+}
+
+cache() {
+  (
+    local url=$(lgtm_nocache)
+    echo "$url" > $cachefile
+  ) &
+}
+
+main() {
+  case "$1" in
+      -m)
+          lgtm_markdown
+          ;;
+      '')
+          lgtm
+          ;;
+      *)
+          usage
+          ;;
+  esac
+}
+
+main $1
+cache
