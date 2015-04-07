@@ -10,6 +10,7 @@ usage() {
     cat <<EOD
 usage: $0 [-m]
 EOD
+    exit 1
 }
 
 lgtm_markdown() {
