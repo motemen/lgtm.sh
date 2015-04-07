@@ -26,20 +26,13 @@ lgtm() {
 }
 
 lgtm_nocache() {
-  echo $(fetch)
-}
-
-fetch() {
     site=${sites[$(($RANDOM % ${#sites[@]}))]}
     local id=$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}')
     echo "http://lgtm.herokuapp.com/$id"
 }
 
 cache() {
-  (
-    local url=$(lgtm_nocache)
-    echo "$url" > $cachefile
-  ) &
+    ( lgtm_nocache > $cachefile ) &
 }
 
 main() {
