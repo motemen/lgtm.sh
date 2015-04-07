@@ -42,17 +42,17 @@ cache() {
 }
 
 main() {
-  case "$1" in
-      -m)
-          lgtm_markdown
-          ;;
-      '')
-          lgtm
-          ;;
-      *)
-          usage
-          ;;
-  esac
+    case "$1" in
+        -m)
+            lgtm_markdown
+            ;;
+        '')
+            lgtm
+            ;;
+        *)
+            usage
+            ;;
+    esac
 }
 
 main $1
