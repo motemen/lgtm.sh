@@ -8,7 +8,7 @@ cachefile="$0.cache"
 
 usage() {
     cat <<EOD
-usage: $0 [-m]
+usage: $0 [-c] [-m]
 EOD
     exit 1
 }
@@ -36,18 +36,27 @@ cache() {
 }
 
 main() {
-    case "$1" in
-        -m)
-            lgtm_markdown
-            ;;
-        '')
-            lgtm
-            ;;
-        *)
-            usage
-            ;;
-    esac
+    lgtm=lgtm
+    pipe=cat
+
+    while [[ $# > 0 ]]; do
+        case "$1" in
+            -c)
+                pipe=pbcopy
+                ;;
+            -m)
+                lgtm=lgtm_markdown
+                ;;
+            *)
+                usage
+                ;;
+        esac
+
+        shift
+    done
+
+    eval "$lgtm | $pipe"
 }
 
-main $1
+main $*
 cache
