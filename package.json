@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "description": "The fastest way to generate animated LGTM images",
   "global": "true",
-  "install": "chmod +x lgtm.sh && install -b lgtm.sh ${PREFIX:-/usr/local}/bin/lgtm",
+  "install": "which pup && chmod +x lgtm.sh && install -b lgtm.sh ${PREFIX:-/usr/local}/bin/lgtm",
   "scripts": [ "lgtm.sh" ]
 }
 
