@@ -27,7 +27,14 @@ lgtm() {
 
 lgtm_nocache() {
     site=${sites[$(($RANDOM % ${#sites[@]}))]}
-    local id=$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}')
+    local id=''
+    local limit=10
+    local count=0
+    while [ "" = "$id" -o "$count" -le "$limit" ]
+    do
+        id=$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}' | awk 'match($0, /http:.+\.gif/)')
+        count=$(( count + 1 ))
+    done
     echo "http://lgtm.herokuapp.com/$id"
 }
 
