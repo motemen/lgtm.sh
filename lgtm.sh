@@ -30,7 +30,7 @@ lgtm_nocache() {
     local id=''
     local limit=10
     local count=0
-    while [ "" = "$id" -o "$count" -le "$limit" ]
+    while [ "$count" -le "$limit" ] && [ "" = "$id" ]
     do
         id=$(curl -sL ${site}random | pup 'meta[name=twitter:image]' 'attr{content}' | awk 'match($0, /http:.+\.gif/)')
         count=$(( count + 1 ))
