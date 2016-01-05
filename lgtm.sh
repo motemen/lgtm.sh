@@ -35,14 +35,27 @@ cache() {
     ( lgtm_nocache > $cachefile ) &
 }
 
+get_clipboard() {
+    if type pbcopy &>/dev/null; then
+        # For OS X
+        echo "pbcopy"
+    elif type xsel &>/dev/null; then
+        # For GNU/Linux
+        # xsel supports multibyte chars
+        echo "xsel --input --clipboard"
+    elif type xclip &>/dev/null; then
+        # For GNU/Linux
+        echo "xclip -selection clipboard"
+    fi
+}
+
 main() {
-    lgtm=lgtm
-    pipe=cat
+    local pipe lgtm
 
     while [[ $# > 0 ]]; do
         case "$1" in
             -c)
-                pipe=pbcopy
+                pipe="$(get_clipboard)"
                 ;;
             -m)
                 lgtm=lgtm_markdown
@@ -55,7 +68,7 @@ main() {
         shift
     done
 
-    eval "$lgtm | $pipe"
+    eval "${lgtm:-lgtm} | ${pipe:-cat}"
 }
 
 main $*
