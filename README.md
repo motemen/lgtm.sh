@@ -4,6 +4,11 @@ The fastest way to generate animated LGTM images
 
 ## Installation
 
+With [homebrew](http://brew.sh/) do:
+
+    % brew tap motemen/motemen
+    % brew install lgtm.sh
+
 With [bpkg](https://github.com/bpkg/bpkg) do:
 
     % bpkg install motemen/lgtm.sh
