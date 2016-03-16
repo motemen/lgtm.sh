@@ -1,8 +1,14 @@
 #!/bin/bash
 
-sites=(
-    http://publicdomaingifs.tumblr.com/
-)
+sourcesfile=~/.config/lgtm.sh/sources
+if [ -e "$sourcesfile" ]; then
+    sites=($(cat "$sourcesfile"))
+else
+    # You can edit this directly, or place a lines of Tumblrs at ~/.config/lgtm.sh/sources.
+    sites=(
+        http://publicdomaingifs.tumblr.com/
+    )
+fi
 
 cachefile="$0.cache"
 
